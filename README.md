@@ -1,2 +1,2 @@
-# React-Clone-Projects
-A repository having a lot of React Projects.
+# Full-Stack-Clone-Projects
+A repository having a lot of Full Stack Projects.
