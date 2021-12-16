@@ -1,0 +1,25 @@
+{
+  "name": "instagram-backend",
+  "version": "1.0.0",
+  "description": "Folder contains all code related to backend teachnolgy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Instagram",
+    "Socila-Media"
+  ],
+  "author": "Anshul Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.12.0-beta.3",
+    "sequelize-cli": "^6.3.0"
+  }
+}
