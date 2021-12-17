@@ -7,6 +7,9 @@ const PORT = 5000;
 app.use(express.json());
 app.use(cors());
 
+const userRoute = require("./routes/Users");
+app.use("/auth", userRoute);
+
 const db = require("./models");
 
 db.sequelize.sync().then(() => {
