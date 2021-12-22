@@ -13,13 +13,21 @@ router.post("/signup", async (req, res) => {
     return res.status(422).send({ message: "Please Fill all the details!!!" });
   }
 
-  const isAlreasyExist = await Users.findOne({
+  let isAlreasyExist = await Users.findOne({
     where: { email: email },
   });
 
+  if (!isAlreasyExist) {
+    isAlreasyExist = await Users.findOne({
+      where: { username: username },
+    });
+  }
+
   try {
     if (isAlreasyExist) {
-      return res.status(404).send("User already Exist with this email!!!");
+      return res
+        .status(404)
+        .send("User already Exist with these credentials!!!");
     }
 
     const newPassword = await bcrypt.hash(password, 12);
@@ -43,9 +51,9 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!email || !password) {
+  if (!username || !email || !password) {
     return res
       .status(422)
       .send({ message: "Please add your email or password!!!" });
@@ -69,10 +77,14 @@ router.post("/signin", async (req, res) => {
 
       // return res.status(200).send({ message: "Login Successfully!!!" });
 
-      const accessToken = sign({ email: email, id: user.id }, JWT_SECRET);
+      const accessToken = sign(
+        { username: username, email: email, id: user.id },
+        JWT_SECRET
+      );
 
       return res.status(200).send({
         token: accessToken,
+        username,
         email,
         id: user.id,
         message: "Login Successfully!!!",
